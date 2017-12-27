@@ -1,0 +1,35 @@
+{% extends 'iota_auth/base.html' %}
+{% block body %}
+	<div class="mdl-grid mdl-grid--fill">
+		<div class="mdl-cell mdl-cell--middle mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+			<div class="mdl-card mdl-shadow--4dp">
+				<div class="mdl-card__title">
+					<h2 class="mdl-card__title-text">Django-Iota-Auth</h2>
+				</div>
+				<div class="mdl-card__supporting-text">
+					<form action="/login/" method="POST">
+						{% csrf_token %}
+						{{ form.non_field_errors }}
+						{{ field.errors }}
+						<div>
+						{{ form.email.label }}
+						{{ form.email }}
+					</div>
+						<div>
+						{{ form.password.label }}
+						{{ form.password }}
+					</div>
+					<div>
+						{{ form.remember.label }}
+						{{ form.remember }}
+					</div>
+					</div>
+					<div class="mdl-card__actions mdl-card--border">
+						<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">Login</button>
+					</form>
+					Don't have a seed? <a href="{% url 'iota_auth:signup' %}">Signup</a>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

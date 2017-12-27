@@ -1,0 +1,49 @@
+{% extends 'iota_auth/base.html' %}
+{% load static %}
+{% block body %}
+	<div class="mdl-grid mdl-grid--fill">
+		<div class="mdl-cell mdl-cell--middle mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+			<div class="mdl-card mdl-shadow--4dp">
+				<div class="mdl-card__title">
+					<h2 class="mdl-card__title-text">Django-Iota-Auth</h2>
+				</div>
+				<div class="mdl-card__supporting-text">
+					<div>
+						Already have an account? <a href="{% url 'iota_auth:login' %}">Login</a>
+					</div>
+					<form method="POST">
+						{% csrf_token %}
+						{{ form.non_field_errors }}
+						{{ field.errors }}
+						<div>
+						{{ form.email.label }}
+						{{ form.email }}
+						</div>
+						<div>
+						{{ form.first_name.label }}
+						{{ form.first_name }}
+						</div>
+						<div>
+						{{ form.last_name.label }}
+						{{ form.last_name }}
+						</div>
+						<div>If you already have an Iota seed, please enter below. If not, you need to enter a seed of at least 81 alphabet characters, and the letter 9. You can use our seed generation service below. Save this seed as it is like your username and password to access your account. If you lose it, you will lose access to your account and your Iota.</div>
+						<div>
+						{{ form.seed.label }}
+						{{ form.seed }}
+						</div>
+						<a id="generate_seed_button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Generate a seed</a>
+						<div>Your seed is:</div>
+						<div id="seed_generated"></div>
+					</div>
+					<div class="mdl-card__actions mdl-card--border">
+						<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">Signup</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src="{% static 'iota_auth/js/iota_auth.js' %}"></script>
+{% endblock %}

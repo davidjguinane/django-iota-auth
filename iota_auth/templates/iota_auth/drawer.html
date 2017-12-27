@@ -1,0 +1,11 @@
+<div class="mdl-layout__drawer">
+	<span class="mdl-layout-title">Django-Iota_auth</span>
+	<nav class="mdl-navigation">
+		{% if not user.is_authenticated %}
+			<a class="mdl-navigation__link" href="{% url 'iota_auth:login' %}">Login</a>
+			<a class="mdl-navigation__link" href="{% url 'iota_auth:signup' %}">Signup</a>
+		{% else %}
+			<a class="mdl-navigation__link" href="">Logout</a>
+		{% endif %}
+	</nav>
+</div>
