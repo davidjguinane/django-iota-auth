@@ -12,25 +12,8 @@
 				<div class="mdl-card__supporting-text">
 					<form action="." method="POST">
 						{% csrf_token %}
-						{{ form.non_field_errors }}
-						{{ field.errors }}
-						<div>
-						{{ form.email.label }}
-						{{ form.email }}
-					</div>
-						<div>
-						{{ form.password.label }}
-						{{ form.password }}
-					</div>
-					<div>
-						{{ form.remember.label }}
-						{{ form.remember }}
-					</div>
-					</div>
-					<div class="mdl-card__actions mdl-card--border">
-						<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">Login</button>
+						<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">Logout</button>
 					</form>
-					Don't have a seed? <a href="{% url 'iota_auth:signup' %}">Signup</a>
 				</div>
 			</div>
 		</div>

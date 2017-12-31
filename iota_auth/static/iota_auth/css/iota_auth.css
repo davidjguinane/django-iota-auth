@@ -1,6 +1,16 @@
+.mdl-content__width {
+	width: 900px;
+	margin: 0 auto;
+}
+
 .mdl-grid--fill {
 	height: -webkit-fill-available;
 	justify-content: center;
+}
+
+.mdl-card--fill {
+	width: 100%;
+	min-height: auto;
 }
 
 #particles-js {

@@ -34,7 +34,7 @@ class UserChangeForm(forms.ModelForm):
  
     class Meta:
         model = User
-        fields = ('email', 'password', 'first_name', 'last_name', 'is_active','is_staff')
+        fields = ('email', 'password', 'address', 'first_name', 'last_name', 'is_active','is_staff')
  
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -54,7 +54,7 @@ class UserAdmin(DjangoUserAdmin):
     list_display = ('email', 'first_name', 'last_name', 'is_staff')
     list_filter = ('email',)
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
+        (None, {'fields': ('email', 'password', 'address')}),
         (_('Personal info'), {'fields': ('first_name', 'last_name')}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser','user_permissions')}),
         (_('Important dates'), {'fields': ('last_login',)}),

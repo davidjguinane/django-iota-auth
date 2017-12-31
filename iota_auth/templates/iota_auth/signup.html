@@ -1,4 +1,7 @@
 {% extends 'iota_auth/base.html' %}
+{% block layout_class %}mdl-layout__header--transparent mdl-layout--no-desktop-drawer-button{% endblock %}
+{% block header_class %}mdl-layout__header--transparent{% endblock %}
+{% block particles_bg %}<div id="particles-js"></div>{% endblock %}
 {% load static %}
 {% block body %}
 	<div class="mdl-grid mdl-grid--fill">

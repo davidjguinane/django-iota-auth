@@ -71,6 +71,7 @@ class User(AbstractUser):
 
 	username = None
 	password = models.CharField(_('password'), max_length=128, unique=True)
+	address = models.CharField(_('address'), max_length=128, blank=True)
 	email = models.EmailField(_('email address'), blank=True, unique=True)
 	first_name = models.CharField(_('first name'), max_length=30, blank=True)
 	last_name = models.CharField(_('last name'), max_length=30, blank=True)
@@ -108,3 +109,11 @@ class User(AbstractUser):
 	# this methods are require to login super user from admin panel
 	def has_module_perms(self, app_label):
 		return self.is_staff
+
+	@property
+	def is_anonymous(self):
+		return False
+
+	@property
+	def is_authenticated(self):
+		return True

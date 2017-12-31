@@ -5,7 +5,9 @@
 			<a class="mdl-navigation__link" href="{% url 'iota_auth:login' %}">Login</a>
 			<a class="mdl-navigation__link" href="{% url 'iota_auth:signup' %}">Signup</a>
 		{% else %}
-			<a class="mdl-navigation__link" href="">Logout</a>
+			<a class="mdl-navigation__link"">{{ request.user.email }}</a>
+			<a class="mdl-navigation__link" href="{% url 'iota_account:account' request.user.pk %}">Account</a>
+			<a class="mdl-navigation__link" href="{% url 'iota_auth:logout' %}">Logout</a>
 		{% endif %}
 	</nav>
 </div>

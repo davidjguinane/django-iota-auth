@@ -1,0 +1,11 @@
+{% extends 'iota_account/account_subnav.html' %}
+{% block account_body %}
+	<div class="mdl-cell mdl-cell--middle mdl-cell--9-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+		<div class="mdl-card mdl-card--fill mdl-shadow--4dp">
+			<div class="mdl-card__supporting-text">
+				{{ form.as_p }}
+				<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Update" />
+			</div>
+		</div>
+	</div>
+{% endblock %}

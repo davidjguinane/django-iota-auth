@@ -13,11 +13,13 @@
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	</head>
 	<body>
-		<div id="particles-js"></div>
-		<div class="demo-layout-transparent mdl-layout mdl-js-layout">
+		{% block particles_bg %}{% endblock %}
+		<div class="mdl-layout mdl-js-layout {% block layout_class %}{% endblock %}">
+			<header class="mdl-layout__header {% block header_class %}{% endblock %}">
 			{% include 'header.html' %}
+		</header>
 			{% include 'drawer.html' %}
-			<main class="mdl-layout__content">
+			<main class="mdl-layout__content mdl-content__width {% block main_class%}{% endblock %}">
 				{% block body %}
 				{% endblock %}
 			</main>

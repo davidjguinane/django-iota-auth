@@ -1,21 +1,25 @@
+from iota import Iota
+
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponseRedirect
 from django.views import View
 from django.conf import settings
-from django.contrib.auth import get_user_model
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.contrib.auth.password_validation import validate_password
+from django.views.decorators.debug import sensitive_post_parameters
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import never_cache
+from django.views.decorators.csrf import csrf_protect
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from project.iota_auth.backend import IotaAuthBackend
 from project.iota_auth.forms import (
 		SignupForm,
 		LoginSeedForm,
 	)
-from project.iota_auth.utils import seed_generator
 
 auth = IotaAuthBackend()
-
-User = get_user_model()
+UserModel = get_user_model()
 
 class SignupView(View):
 
@@ -68,6 +72,12 @@ class LoginView(View):
 	template_name = 'iota_auth/login.html'
 	form_class = LoginSeedForm
 
+	@method_decorator(sensitive_post_parameters())
+	@method_decorator(csrf_protect)
+	@method_decorator(never_cache)
+	def dispatch(self, request, *args, **kwargs):
+		return super(LoginView, self).dispatch(request, *args, **kwargs)
+
 	def get_template_name(self):
 		return self.template_name
 
@@ -79,10 +89,10 @@ class LoginView(View):
 		context = {'form':form}
 		return render(request, self.get_template_name(), context)
 
-	def login_user(self, email, password):
-		user = auth.authenticate(email, password)
+	def login_user(self, request, email=None, password=None):
+		user = auth.authenticate(request, username=email, password=password)
 		if user is not None:
-			auth.login(self.request, user, settings.AUTHENTICATION_BACKENDS[0])
+			login(request, user, settings.AUTHENTICATION_BACKENDS[0])
 			self.request.session.set_expiry(0)
 		else:
 			print('Error')
@@ -96,19 +106,37 @@ class LoginView(View):
 		if form.is_valid():
 			password = form.cleaned_data['password']
 			email = form.cleaned_data['email']
-			self.login_user(email, password)
-			return HttpResponseRedirect(reverse('iota_auth:authenticated'))
+			self.login_user(self.request, email=email, password=password)
+			return redirect(self.get_success_url())
 		else:
 			self.form_invalid(form)
 
+class LogoutView(LoginRequiredMixin, View):
+
+	template_name = 'iota_auth/logout.html'
+
+	def get_template_name(self):
+		return self.template_name
+
+	def get_success_url(self):
+		return settings.LOGOUT_REDIRECT_URL
+
+	def get(self, request):
+		return render(request, self.get_template_name())
+
+	def post(self, request):
+		logout(request)
+		return redirect(self.get_success_url())	
+
 class AuthenticatedView(LoginRequiredMixin, View):
 
-	login_url = '/login/'
-	redirect_field_name = 'redirect_to'
 	template_name = 'iota_auth/authenticated.html'	
+
+	def get_object(self):
+		return self.request.user
 
 	def get_template_name(self):
 		return self.template_name	
 
-	def get(self, request):
+	def get(self, request, *args):
 		return render(request, self.get_template_name())
