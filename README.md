@@ -18,12 +18,12 @@ Install the module and its dependencies with pip:
 pip install django-iota-auth
 ```
 
-`django-iota-auth` relies on the `django-encrypted-session-cookie` module. Follow the installation instructions [here]](https://github.com/brightinteractive/django-encrypted-cookie-session) for setup. The settings that needs to be configured are:
+`django-iota-auth` relies on the `django-encrypted-session-cookie` module. Follow the installation instructions [here](https://github.com/brightinteractive/django-encrypted-cookie-session) for setup. The settings that needs to be configured are:
 
 ```
 SESSION_ENGINE = 'encrypted_cookies'
 ENCRYPTED_COOKIE_KEYS = ['your_key_here']
-SESSION_COOKIE_SECURE = False # in development, true in production
+SESSION_COOKIE_SECURE = False #in development, True in production
 ```
 
 Add the following configuration settings to your 'settings.py' file. Setting the 'AUTH_USER_MODEL' setting to point to 'django-iota-auth':
