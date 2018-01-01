@@ -1,6 +1,6 @@
 # Django-Iota-Auth #
 
-Out of the box Django ships with a User authentication backend that is suitable for many development cases. `django-iota-auth` is a custom User authentication backend that maintains much of core Django functionality that site developers desire, while providing the ability to connect the User to the IOTA Tangle, and develop IOTA web applications with the Django web development framework. It includes:
+Out of the box Django ships with a User authentication backend that is suitable for many development cases. `iota-auth` is a custom User authentication backend that maintains much of core Django functionality that site developers desire, while providing the ability to connect the User to the IOTA Tangle, and develop IOTA web applications with the Django web development framework. It includes:
 
 1. Custom seed validator
 2. [Encrytpted session cookies](https://github.com/brightinteractive/django-encrypted-cookie-session) to store the User's seed in Django's session framework securely, allowing access to the IOTA Tangle using the [PyOTA library](https://github.com/iotaledger/iota.lib.py)
@@ -8,17 +8,17 @@ Out of the box Django ships with a User authentication backend that is suitable 
 
 # Adding DIA to your project #
 
-`django-iota-auth` is currently in development and has only been tested in new projects. Adding to an existing project may be unstable or cause unwanted consequences. To be tested.
+`iota-auth` is currently in development and has only been tested in new projects. Adding to an existing project may be unstable or cause unwanted consequences. To be tested.
 
 You'll need Django X.X or greater and Python X.X are supported.
 
 Install the module and its dependencies with pip:
 
 ```
-pip install django-iota-auth
+pip install iota-auth
 ```
 
-`django-iota-auth` relies on the `django-encrypted-session-cookie` module. Follow the installation instructions [here](https://github.com/brightinteractive/django-encrypted-cookie-session) for setup. The settings that needs to be configured are:
+`iota-auth` relies on the `django-encrypted-session-cookie` module. Follow the installation instructions [here](https://github.com/brightinteractive/django-encrypted-cookie-session) for setup. The settings that needs to be configured are:
 
 ```
 SESSION_ENGINE = 'encrypted_cookies'
@@ -32,7 +32,7 @@ Add the following configuration settings to your 'settings.py' file. Setting the
 AUTH_USER_MODEL = 'iota_auth.User'
 ```
 
-Add `django-iota-auth` to the `AUTHENTICATION_BACKENDS` setting:
+Add `iota-auth` to the `AUTHENTICATION_BACKENDS` setting:
 
 ```
 AUTHENTICATION_BACKENDS = (
