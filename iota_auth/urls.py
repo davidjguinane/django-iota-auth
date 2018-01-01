@@ -1,6 +1,5 @@
 from django.urls import path, include
 
-from project.iota_auth import views
 from .views import (
 	LoginView, 
 	SignupView,

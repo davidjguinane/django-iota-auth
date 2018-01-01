@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import Group
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
  
-from project.iota_auth.models import User
+from .models import User
  
 class UserCreationForm(forms.ModelForm):
     #A form for creating new users. Includes all the required

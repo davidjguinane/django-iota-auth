@@ -12,8 +12,8 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from project.iota_auth.backend import IotaAuthBackend
-from project.iota_auth.forms import (
+from .backend import IotaAuthBackend
+from .forms import (
 		SignupForm,
 		LoginSeedForm,
 	)

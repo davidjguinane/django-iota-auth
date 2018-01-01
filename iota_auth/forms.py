@@ -1,7 +1,7 @@
 from django import forms
 from django.conf import settings
 
-from project.iota_auth.models import User
+from .models import User
 
 class LoginForm(forms.Form):
 

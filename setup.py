@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 setup(
   name = 'iota_auth',
   packages = ['iota_auth'], # this must be the same as the name above
@@ -13,7 +13,7 @@ setup(
     'Development Status :: 4 - Beta',
     'Environment :: Web Environment',
     'Framework :: Django',
-    'Framework :: Django :: 2.0',  # replace "X.Y" as appropriate
+    'Framework :: Django :: 2.0',
     'Natural Language :: English',
     'Intended Audience :: Developers',
     'License :: OSI Approved :: GNU General Public License v3 (GPLv3)', # example license
@@ -21,4 +21,12 @@ setup(
     'Programming Language :: Python',
     'Programming Language :: Python :: 3.6',
   ],
+  install_requires=[
+  'django-encrypted-cookie-session >= 3.2.0',
+  'pyota',
+  'six >=1.11.8',
+  'filters >= 1.3.2',
+  'request >= 2.18.4',
+  'pysha3 >= 1.0.2',
+  ]
 )
