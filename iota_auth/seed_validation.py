@@ -12,14 +12,14 @@ class IotaSeedValidator:
 			raise ValidationError(
 				_("This seed must contain at least %(exact_length)d characters. The entered seed is to short"),
 				code='password_too_short',
-				params-={'exact_length': self.exact_length},
+				params={'exact_length': self.exact_length},
 				)
 		# Check if length is greater than 81 Characters
 		if len(password) > self.exact_length:
 			raise ValidationError(
 				_("This seed must contain exactly %(exact_length)d characters. The entered seed is to long"),
 				code='password_too_long',
-				params-={'exact_length': self.exact_length},
+				params={'exact_length': self.exact_length},
 				)
 		# Check if any of the characters are lower case
 		for char in password:
@@ -45,11 +45,11 @@ class IotaSeedValidator:
 				)		
 
 	def get_help_text(self):
-		if self.code = 'password_too_short':
+		if self.code == 'password_too_short':
 			return _("Your password must contain exactly %(exact_length)d characters." % {'exact_length': self.exact_length})
-		elif self.code = 'password_too_long':
+		elif self.code == 'password_too_long':
 			return _("This seed must contain exactly %(exact_length)d characters. The entered seed is to long" % {'exact_lenght':self.exact_length})
-		elif self.code = 'password_contains_lower_case':
+		elif self.code == 'password_contains_lower_case':
 			return _("This seed must contain all upper case Latin characters.")
 		else:
 			return _("This seed must contain the letter 9 at least once.")
