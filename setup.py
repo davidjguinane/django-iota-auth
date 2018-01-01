@@ -1,39 +1,24 @@
-import os
-from setuptools import find_packages, setup
-
-with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
-    README = readme.read()
-
-# allow setup.py to be run from any path
-os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
-
+from distutils.core import setup
 setup(
-    name='django-iota-auth',
-    version='0.1a',
-    packages=find_packages(),
-    include_package_data=True,
-    license='GNU GPL3 License',  # example license
-    description='A Django app to authenticate a User and connect them to the tangle.',
-    long_description=README,
-    url='https://github.com/davidjguinane/django-iota-auth',
-    author='David Guinane',
-    author_email='david.j.guinane@gmail.com',
-    classifiers=[
-        'Development Status :: 3 - Alpha',
-        'Environment :: Web Environment',
-        'Framework :: Django',
-        'Framework :: Django :: X.Y',  # replace "X.Y" as appropriate
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: GNU GPL3 License',  # example license
-        'Operating System :: OS Independent',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-        'Topic :: Internet :: WWW/HTTP',
-        'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
-    ],
-    python_requires='>=3',
-    keywords='iota django authentication',
-    install_requires=['pyota', 'pillow', 'django']
+  name = 'iota_auth',
+  packages = ['iota_auth'], # this must be the same as the name above
+  version = '0.1',
+  description = 'A custom authentication backend for Django Users to connect to the IOTA Tangle.',
+  author = 'David Guinane',
+  author_email = 'david.j.guinane@gmail.com',
+  url = 'https://github.com/davidjguinane', # use the URL to the github repo
+  download_url = 'https://github.com/davidjguinane/django-iota-auth/archive/0.1.tar.gz', # I'll explain this in a second
+  keywords = ['iota', 'django', 'authentication'], # arbitrary keywords
+  classifiers = [
+    'Development Status :: 4 - Beta',
+    'Environment :: Web Environment',
+    'Framework :: Django',
+    'Framework :: Django :: 2.0',  # replace "X.Y" as appropriate
+    'Natural Language :: English',
+    'Intended Audience :: Developers',
+    'License :: OSI Approved :: GNU General Public License v3 (GPLv3)', # example license
+    'Operating System :: OS Independent',
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3.6',
+  ],
 )
-
