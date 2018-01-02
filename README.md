@@ -55,6 +55,7 @@ NODE_URI = 'http://iota.bitfinex.com:80/'
 Other settings you can customise are:
 
 ```
+LOGIN_URL = '<your_login_view_here>'
 LOGIN_REDIRECT_URL = 'your_view_here'
 LOGOUT_REDIRECT_URL = 'your_view_here'
 ```
