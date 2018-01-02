@@ -17,7 +17,7 @@ from .forms import (
 	)
 
 auth = IotaAuthBackend()
-UserModel = get_user_model()
+User = get_user_model()
 
 class SignupView(View):
 
