@@ -1,5 +1,3 @@
-from iota import Iota
-
 from django.conf import settings
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth import get_user_model
@@ -15,7 +13,6 @@ class IotaAuthBackend:
 		else:
 			if getattr(user, 'is_active', False) and  user.check_password(password):
 				request.session['seed'] = password
-				print(request.session['seed'])
 				return user
 		return None
 

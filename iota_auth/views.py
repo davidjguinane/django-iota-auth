@@ -1,5 +1,3 @@
-from iota import Iota
-
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponseRedirect
 from django.views import View
