@@ -6,6 +6,10 @@ Out of the box Django ships with a User authentication backend that is suitable 
 2. [Encrytpted session cookies](https://github.com/brightinteractive/django-encrypted-cookie-session) to store the User's seed in Django's session framework securely, allowing access to the IOTA Tangle using the [PyOTA library](https://github.com/iotaledger/iota.lib.py)
 2. Custom authentication backend which integrates with Django's admin interface
 
+# Disclaimer #
+
+WARNING! `iota-auth` saves your IOTA seed in the Django sessions framework. To make this secure, Encrypted Cookie Sessions have been implemented. However I have not tested security in production. Use at your own risk. I have been developing with a 'trial' seed in a empty or relatively empty wallet to ensure no wallets with significant balances are compromised. 
+
 # Adding DIA to your project #
 
 `iota-auth` is currently in development and has only been tested in new projects. Adding to an existing project may be unstable or cause unwanted consequences. To be tested.
@@ -60,32 +64,52 @@ LOGOUT_REDIRECT_URL = 'your_view_here'
 Connecting a User to the Tangle is easy. An example is given below of returning the IOTA account data associated with the logged in User:
 
 ```
-#views.py
+# urls.py
+
+from .views import (
+    AccountDetailView, 
+    ...
+    )
+
+app_name = 'iota_account'
+urlpatterns = [
+    path('account/', AccountDetailView.as_view(), name='account'),
+    ...
+]
+
+# views.py
 from iota import Iota
 
 from django.shortcuts import render
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
-from django.contrib.auth import get_user_model
 
-User = get_user_model()
+class AccountDetailView(LoginRequiredView, View):
 
-class AccessUsersAccountView(LoginRequiredView, View):
+    template_name = 'iota_account/wallet.html'
+
+    def get_template_name(self):
+        return self.template_name   
 
     def connect_to_tangle(self, request):
         api = Iota(settings.NODE_URI, request.session['seed'])
         print(api.get_node_info())
         return api
 
-    def get_account_data(self, api):
-        account_data = api.get_account_data()
-        return account_data
-
     def get(self, request, *args):
         api = self.connect_to_tangle(request)
-        data = self.get_account_data(api)
+        data = api.get_account_data()
         context = { 'data' : data }
         return render(request, self.get_template_name(), context)
 
+# wallet.html
+
+{% extends 'base.html' %}
+
+{% block body %}
+<div>Balance: {{ data.balance }}</div>
+<div>Address: {{ data.address }}</div>
+<div>Bundles: {{ data.bundles }}</div>
+{% endblock %}
 ```
